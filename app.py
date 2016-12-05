@@ -10,7 +10,7 @@ from lxml import html
 app = Flask(__name__)
 
 @app.route("/")
-def main():
+def index():
     page = requests.get("http://randomfactgenerator.net")
     tree = html.fromstring(page.content)
     facts = list(filter(lambda x: x!= "\n\n",
