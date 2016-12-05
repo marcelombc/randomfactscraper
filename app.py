@@ -11,7 +11,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return 'Ok!'
+    page = requests.get("http://randomfactgenerator.net")
+    tree = html.fromstring(page.content)
+    facts = list(filter(lambda x: x!= "\n\n",
+                 tree.xpath("//div[@id='z']/text()")))
+    resp = Response(response=json.dumps(facts),
+        status=200, \
+        mimetype="application/json")
+
+    return resp
 
 @app.route('/<name>')
 def hello_name(name):
