@@ -2,8 +2,9 @@
 """random_fact_scraper.py - Scrape the http://randomfactgenerator.net website."""
 
 import os
+import json
 import requests
-from flask import Flask
+from flask import Flask, Response
 from lxml import html
 
 app = Flask(__name__)
@@ -12,9 +13,14 @@ app = Flask(__name__)
 def main():
     page = requests.get("http://randomfactgenerator.net")
     tree = html.fromstring(page.content)
-    facts = tree.xpath("//div[@id='z']/text()")
+    facts = list(filter(lambda x: x!= "\n\n",
+                 tree.xpath("//div[@id='z']/text()")))
+    resp = Response(response=json.dumps(facts),
+        status=200, \
+        mimetype="application/json")
 
-    return list(filter(lambda x: x!= "\n\n", facts))
+    # return list(filter(lambda x: x!= "\n\n", facts))
+    return resp
 
 
 #-------------------------------------------------------------------------------
