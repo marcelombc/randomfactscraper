@@ -21,10 +21,6 @@ def index():
 
     return resp
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
-
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
