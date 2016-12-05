@@ -15,7 +15,8 @@ def index():
     tree = html.fromstring(page.content)
     facts = list(filter(lambda x: x!= "\n\n",
                  tree.xpath("//div[@id='z']/text()")))
-    resp = Response(response=json.dumps(facts),
+    data = json.dumps({ "text": facts[0] })
+    resp = Response(response=data,
         status=200, \
         mimetype="application/json")
 
