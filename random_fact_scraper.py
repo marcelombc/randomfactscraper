@@ -19,7 +19,6 @@ def main():
         status=200, \
         mimetype="application/json")
 
-    # return list(filter(lambda x: x!= "\n\n", facts))
     return resp
 
 
