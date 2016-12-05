@@ -19,7 +19,7 @@ def index():
         status=200, \
         mimetype="application/json")
 
-    return resp
+    return resp[0]
 
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
