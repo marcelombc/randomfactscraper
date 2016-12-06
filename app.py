@@ -15,7 +15,10 @@ def index():
     tree = html.fromstring(page.content)
     facts = list(filter(lambda x: x!= "\n\n",
                  tree.xpath("//div[@id='z']/text()")))
-    data = json.dumps({ "text": facts[0] })
+    data = json.dumps({
+        "response_type": "in_channel",
+        "text": facts[0]
+    })
     resp = Response(response=data,
         status=200, \
         mimetype="application/json")
